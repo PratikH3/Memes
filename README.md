@@ -7,6 +7,4 @@ Glide - Glide is a fast and efficient open source media management and image loa
 
 API Info - meme_api created by Dev Daksan. This API fetches response for a random meme from reddit.
 
-API Link - https://meme-api.herokuapp.com/gimme
-
-API Repository - https://github.com/D3vd/Meme_Api
+API Link -  https://github.com/D3vd/Meme_Api
