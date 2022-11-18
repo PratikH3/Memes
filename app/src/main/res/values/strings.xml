@@ -2,4 +2,5 @@
     <string name="app_name">Memes</string>
     <string name="next">NEXT</string>
     <string name="imgDesc">Meme Image</string>
+    <string name="error_msg">Oh! Error ocuured\nPlease load NEXT meme</string>
 </resources>

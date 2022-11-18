@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,12 +25,16 @@ import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONException;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     ConstraintLayout bg;
     ImageView imageView;
     ProgressBar progressBar;
     Button btnNext;
+    TextView title;
+    TextView subreddit, tvError;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -61,14 +66,24 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         imageView.setVisibility(View.INVISIBLE);
 
+        title = findViewById(R.id.title);
+        subreddit = findViewById(R.id.subreddit);
+        tvError = findViewById(R.id.tvError);
+
+        subreddit.setVisibility(View.INVISIBLE);
+        title.setVisibility(View.INVISIBLE);
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
                     try {
                         String urlString = response.getString("url");
+                        String actualTitle = response.getString("title");
+                        String actualSubreddit = response.getString("subreddit");
                         Glide.with(getApplicationContext()).load(urlString).listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                 progressBar.setVisibility(View.GONE);
+                                tvError.setVisibility(View.VISIBLE);
                                 return false;
                             }
 
@@ -76,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 progressBar.setVisibility(View.GONE);
                                 imageView.setVisibility(View.VISIBLE);
+                                subreddit.setVisibility(View.VISIBLE);
+                                subreddit.setText(actualSubreddit.toUpperCase(Locale.ROOT));
+
+                                if(!actualTitle.equals(actualSubreddit.toLowerCase())){
+                                    title.setVisibility(View.VISIBLE);
+                                    title.setText(actualTitle);
+                                }
+
                                 return false;
                             }
                         }).into(imageView);
