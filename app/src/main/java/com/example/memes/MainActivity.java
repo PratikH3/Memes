@@ -1,9 +1,13 @@
 package com.example.memes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadMeme(){
+
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="https://meme-api.herokuapp.com/gimme";
 
@@ -98,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                                     title.setVisibility(View.VISIBLE);
                                     title.setText(actualTitle);
                                 }
-
                                 return false;
                             }
                         }).into(imageView);
