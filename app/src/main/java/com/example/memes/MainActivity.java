@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="https://meme-api.herokuapp.com/gimme";
+        String url ="https://meme-api.com/gimme";
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
